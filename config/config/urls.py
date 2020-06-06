@@ -20,5 +20,6 @@ from django.conf.urls import include
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),
+    url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
 ]
