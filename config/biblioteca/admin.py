@@ -5,8 +5,17 @@ from .models import *
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'telefono', 'direccion', 'codigo',]
 
+    fieldsets = (
+        ('Datos', {
+          'fields': ('nombre',)  
+        }),
+        ('Contacto', {
+            'fields': ('direccion', 'telefono')
+        }),
+    )
+
 class LibroAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'editorial', 'paginas', 'codigo', 'autor',]
+    list_display = ['titulo', 'editorial',]
     
 class EjemplarAdmin(admin.ModelAdmin):
     list_display = ['localizacion', 'codigo', 'libro',]
