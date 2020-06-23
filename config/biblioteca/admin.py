@@ -4,7 +4,8 @@ from .models import *
 
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'telefono', 'direccion', 'codigo',]
-
+    list_display_links = ('nombre', 'telefono', 'direccion', 'codigo',)
+    
     fieldsets = (
         ('Datos', {
           'fields': ('nombre',)  
@@ -16,12 +17,22 @@ class UsuarioAdmin(admin.ModelAdmin):
 
 class LibroAdmin(admin.ModelAdmin):
     list_display = ['titulo', 'editorial',]
-    
-class EjemplarAdmin(admin.ModelAdmin):
-    list_display = ['localizacion', 'codigo', 'libro',]
+    list_display_links = ('titulo', 'editorial',)
 
+class LibroInline(admin.TabularInline):
+    model = Libro
+    fields = ['titulo', 'editorial', 'paginas']
+    
 class AutorAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'codigo',]        
+    list_display_links = ('nombre', 'codigo',)
+    search_fields = ['nombre']
+    inlines = [LibroInline]
+
+class EjemplarAdmin(admin.ModelAdmin):
+    list_display = ['localizacion', 'libro', 'codigo',]
+    list_display_links = ('localizacion', 'libro', 'codigo',)
+    search_fields = ['libro__titulo']
 
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Libro, LibroAdmin)
