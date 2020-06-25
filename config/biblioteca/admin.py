@@ -19,8 +19,9 @@ class LibroAdmin(admin.ModelAdmin):
     list_display = ['titulo', 'editorial',]
     list_display_links = ('titulo', 'editorial',)
 
-class LibroInline(admin.TabularInline):
+class LibroInline(admin.StackedInline):
     model = Libro
+    extra = 0
     fields = ['titulo', 'editorial', 'paginas']
     
 class AutorAdmin(admin.ModelAdmin):
